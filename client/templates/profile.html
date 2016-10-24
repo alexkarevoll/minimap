@@ -1,0 +1,15 @@
+<div>
+  <h1>Current User: {{ main.currentUser.username }}</h1>
+  <h2>{{ postCtrl.title }}</h2>
+</div>
+<div>
+  <form ng-submit="postCtrl.addCandy()">
+      <input ng-model="postCtrl.newCandy.name" type="text" placeholder="Candy Name">
+    <button type="submit" name="button">Submit</button>
+  </form>
+</div>
+<div>
+  <ul>
+    <li ng-repeat="candy in postCtrl.candies">{{ candy.name }}</li>
+  </ul>
+</div>
