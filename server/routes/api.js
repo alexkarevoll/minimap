@@ -1,9 +1,8 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
-
 var User = require('../models/User.js')
-var Candy = require('../models/Candy.js')
+var Event = require('../models/Event.js')
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
@@ -64,21 +63,28 @@ router.get('/status', function(req, res) {
   })
 })
 
-// CANDIES
+// EVENTS
 
-router.get('/candies', function(req, res){
+router.get('/events', function(req, res){
   // need to find it by the user
-  Candy.find({}, function(err, data){
+  Event.find({}, function(err, data){
     if(err) return console.log(err)
     res.json(data)
   })
 })
 
-router.post('/candies', function(req, res){
+router.post('/events', function(req, res){
   // need to find it by the user
-  Candy.create(req.body, function(err, data){
-    if(err) return console.log(err)
-    res.json(data)
+  User.findById(req.user._id, function(err, user){
+    if (err) return console.log(err)
+    var newEvent = new Event(req.body)
+    newEvent.by_ = user
+    newEvent.save(function(err, event){
+      user.events.push(event)
+      user.save(function(err, user){
+        res.json(event)
+      })
+    })
   })
 })
 

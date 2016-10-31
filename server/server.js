@@ -1,7 +1,4 @@
-#!/usr/bin/env node
-var port = process.env.PORT || 3000
-
-// dependencies
+// dependencies --------------------------------------
 var express = require('express')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
@@ -13,10 +10,14 @@ var path = require('path')
 var passport = require('passport')
 var passportConfig = require('./config/passport.js')
 
-// mongoose
-mongoose.connect('mongodb://localhost/mean-auth', function(err) {
-  if(err) return console.log(err)
-  console.log("Connected to MongoDB (mean-auth)")
+// mongoose -----------------------------------------
+const PORT = process.env.PORT || 3000
+const mongoConnectionString=process.env.MONGO_URL
+
+
+mongoose.connect('mongodb://localhost/minimap', function(err){
+	if(err) return console.log(err)
+	console.log("Connected to MongoDB")
 })
 
 // user schema/model
@@ -66,6 +67,6 @@ app.use(function(err, req, res) {
   }))
 })
 
-app.listen(port, function() {
-  console.log("Listening for requests on port:", port)
+app.listen(PORT, function() {
+  console.log("Listening for requests on port:", PORT)
 })

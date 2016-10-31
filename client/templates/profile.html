@@ -1,15 +1,15 @@
 <div>
-  <h1>Current User: {{ main.currentUser.username }}</h1>
+  <h1>Current User: {{ postController.currentUser.username }}</h1>
   <h2>{{ postCtrl.title }}</h2>
 </div>
 <div>
-  <form ng-submit="postCtrl.addCandy()">
-      <input ng-model="postCtrl.newCandy.name" type="text" placeholder="Candy Name">
+  <form ng-submit="postCtrl.addEvent()">
+      <input ng-model="postCtrl.newEvent.name" type="text" placeholder="Event Name">
     <button type="submit" name="button">Submit</button>
   </form>
 </div>
 <div>
   <ul>
-    <li ng-repeat="candy in postCtrl.candies">{{ candy.name }}</li>
+    <li ng-repeat="event in postCtrl.events">{{ event.name }}</li>
   </ul>
 </div>

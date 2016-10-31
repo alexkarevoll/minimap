@@ -6,7 +6,7 @@ var passportLocalMongoose = require('passport-local-mongoose')
 var User = new Schema({
   username: String,
   password: String,
-  candies: [{type: mongoose.Schema.Types.ObjectId, ref:'Candy'}]
+  events: [{type: mongoose.Schema.Types.ObjectId, ref:'Event'}]
 })
 
 User.plugin(passportLocalMongoose)

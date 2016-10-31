@@ -10,6 +10,7 @@ angular.module('myApp')
   loginController.$inject = ['$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
+  postController.$inject = ['$http', 'AuthService']
 
 
 function mainController($rootScope, $state, AuthService) {
@@ -94,20 +95,23 @@ function registerController($state, AuthService) {
 }
 
 // POST CONTROLLER:
-postController.$inject = ['$http']
 
-function postController($http){
+function postController($http, AuthService){
   var vm = this
   vm.title = "Post Controller"
-  $http.get('/api/candies')
-    .success(function(data){
-      vm.candies = data
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
     })
-  vm.addCandy = function(){
-    console.log(vm.newCandy)
-    $http.post('/api/candies', vm.newCandy)
+  $http.get('/api/events')
+    .success(function(data){
+      vm.currentUser.events = data
+    })
+  vm.addEvent = function(){
+    $http.post('/api/events', vm.newEvent)
       .success(function(data){
-        vm.candies.push(data)
+        console.log(vm.currentUser)
+        vm.currentUser.events.push(data)
       })
   }
 }
