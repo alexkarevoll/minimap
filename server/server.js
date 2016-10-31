@@ -36,7 +36,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: 'minimap rulz',
     resave: false,
     saveUninitialized: false
 }))
@@ -47,7 +47,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 // routes
 app.use('/user/', routes)
 app.use('/api/', routes)
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'))
 })
@@ -67,6 +66,7 @@ app.use(function(err, req, res) {
   }))
 })
 
+// listen
 app.listen(PORT, function() {
   console.log("Listening for requests on port:", PORT)
 })

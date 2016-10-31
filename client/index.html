@@ -6,10 +6,11 @@
   <title>minimap</title>
   <!-- styles -->
   <link rel="stylesheet" href="./css/bootstrap.min.css" media="screen" title="no title">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD9xQVo-UODHfFeMzCmmABD19p6dBGtq8"></script>
 </head>
 
+  <navigation-bar></navigation-bar>
   <div class="container" ng-controller="mainController as main">
-    <navigation-bar></navigation-bar>
     Logged in user: {{ main.currentUser.username }}
     <div ui-view></div>
   </div>
@@ -22,6 +23,8 @@
   <script src="./main.js"></script>
   <script src="./services.js"></script>
   <script src="./controllers.js"></script>
+  <script src="./gservice.js"></script>
+
 
 </body>
 </html>

@@ -6,15 +6,16 @@ angular.module('myApp')
   .controller('postController', postController)
 
 
-  mainController.$inject = ['$rootScope', '$state', 'AuthService']
+  mainController.$inject = ['$rootScope', '$state', 'AuthService', 'gservice']
   loginController.$inject = ['$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
 
 
-function mainController($rootScope, $state, AuthService) {
+function mainController($rootScope, $state, AuthService, gservice) {
   var vm = this
+  console.log(gservice)
   $rootScope.$on('$stateChangeStart', function (event) {
     // console.log("Changing states")
     AuthService.getUserStatus()
