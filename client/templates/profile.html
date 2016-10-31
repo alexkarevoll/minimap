@@ -1,5 +1,5 @@
 <div>
-  <h1>Current User: {{ postController.currentUser.username }}</h1>
+  <h1>Current User: {{ postCtrl.currentUser.username }}</h1>
   <h2>{{ postCtrl.title }}</h2>
 </div>
 <div>
@@ -10,6 +10,6 @@
 </div>
 <div>
   <ul>
-    <li ng-repeat="event in postCtrl.events">{{ event.name }}</li>
+    <li ng-repeat="event in postCtrl.currentUser.events">{{ event.name }}</li>
   </ul>
 </div>

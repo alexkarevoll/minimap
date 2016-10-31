@@ -7,4 +7,4 @@ var Event = new Schema({
   name: String
 })
 
-module.exports = mongoose.model('events', Event)
+module.exports = mongoose.model('Event', Event)

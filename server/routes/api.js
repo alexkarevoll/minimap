@@ -73,6 +73,12 @@ router.get('/events', function(req, res){
   })
 })
 
+router.get('/myevents', function(req, res){
+  User.findById(req.user._id).populate("events").exec(function(err, user){
+    res.json(user.events)
+  })
+})
+
 router.post('/events', function(req, res){
   // need to find it by the user
   User.findById(req.user._id, function(err, user){

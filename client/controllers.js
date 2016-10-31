@@ -98,19 +98,23 @@ function registerController($state, AuthService) {
 
 function postController($http, AuthService){
   var vm = this
-  vm.title = "Post Controller"
+  vm.title = "Post Controller Is Here"
+  vm.currentUser = {}
+  vm.currentUser.events = []
   AuthService.getUserStatus()
     .then(function(data){
       vm.currentUser = data.data.user
+      $http.get('/api/myevents')
+        .then(function(data){
+          vm.currentUser.events = data.data
+          console.log(data.data)
+        })
     })
-  $http.get('/api/events')
-    .success(function(data){
-      vm.currentUser.events = data
-    })
-  vm.addEvent = function(){
+
+  vm.addEvent = function() {
     $http.post('/api/events', vm.newEvent)
       .success(function(data){
-        console.log(vm.currentUser)
+        console.log(data)
         vm.currentUser.events.push(data)
       })
   }
