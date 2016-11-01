@@ -6,14 +6,14 @@ angular.module('myApp')
   .controller('postController', postController)
 
 
-  mainController.$inject = ['$rootScope', '$state', 'AuthService', '$http']
-  loginController.$inject = ['$state', 'AuthService']
+  mainController.$inject = ['$rootScope', '$state', 'AuthService']
+  loginController.$inject = ['$http', '$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
 
 
-function mainController($rootScope, $state, AuthService, $http) {
+function mainController($rootScope, $state, AuthService) {
   var vm = this
   $rootScope.$on('$stateChangeStart', function (event) {
     // console.log("Changing states")
@@ -22,17 +22,20 @@ function mainController($rootScope, $state, AuthService, $http) {
         vm.currentUser = data.data.user
       })
   })
-  // TODO DOESNT WORK YET
-  // $http.get('/api/events', events)
-  //   .then(function(data) {
-  //     console.log("The main controller got this data from /api/events")
-  //     console.log(events)
-  //   })
 }
 
 // LOGIN CONTROLLER:
-function loginController($state, AuthService) {
+function loginController($http, $state, AuthService) {
   var vm = this
+  // get json object full of events from api
+  // currently not making a call
+  var data = {} // only here so it doesn't break
+  $http.get('api/events', data)
+    .then(function(data){
+      console.log("banana")
+      vm.eventLocations = data
+    })
+
   vm.login = function () {
 
     // initial values

@@ -73,8 +73,7 @@ router.get('/events', function(req, res){
   // res.send('hello from .get /events')
   Event.find({}, function(err, events){
     if(err) return console.log(err)
-    console.log("api.js .get /events data")
-    console.log(events)
+    console.log("Someone went to 'get' '/api/events'")
     res.json(events)
   })
 })

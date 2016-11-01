@@ -1,7 +1,12 @@
+
 <div class="col-md-8">
   <ng-map center="current-location" zoom="14">
     <marker fillColor="green" title="you are here" position="current-location" title="hello"></marker>
+    <marker ng-repeat="p in loginCtrl.eventLocations.data" title="{{ p.name }}" position="{{ p.location }}" title="hello"></marker>
   </ng-map>
+  <ul> Locations
+    <li ng-repeat="p in loginCtrl.eventLocations.data">{{ p.location }}: {{ p.name }}</li>
+  </ul>
 </div>
 <div class="col-md-4">
   <h1>Login</h1>
