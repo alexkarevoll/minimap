@@ -3,14 +3,16 @@
   <h2>{{ postCtrl.title }}</h2>
 </div>
 <div>
-  <form ng-submit="postCtrl.addEvent()">
-      <input ng-model="postCtrl.newEvent.name" type="text" placeholder="Event Name">
-      <input ng-model="postCtrl.newEvent.address" type="text" placeholder="Address (be as precise as possible)">
-    <button type="submit" name="button">Submit</button>
+  <form class="form-inline" ng-submit="postCtrl.addEvent()">
+    <div class="form-group">
+      <input class="form-control" ng-model="postCtrl.newEvent.name" type="text" placeholder="Event Name">
+      <input class="form-control" ng-model="postCtrl.newEvent.address" type="text" placeholder="Address (precise as possible)">
+      <button class="btn btn-default"type="submit" name="button">Submit</button>
+    </div>
   </form>
 </div>
 <div>
-  <ul>
-    <li ng-repeat="event in postCtrl.currentUser.events">{{ event.name }} : {{ event.address}}</li>
+  <ul lass="list-group">
+    <li class="list-group-item" ng-repeat="event in postCtrl.currentUser.events"> Event Name: {{ event.name }} | Event Address: {{ event.address}}</li>
   </ul>
 </div>
