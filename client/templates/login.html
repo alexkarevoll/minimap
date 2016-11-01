@@ -1,3 +1,8 @@
+<div class="col-md-8">
+  <ng-map center="current-location" zoom="14">
+    <marker fillColor="green" title="you are here" position="current-location" title="hello"></marker>
+  </ng-map>
+</div>
 <div class="col-md-4">
   <h1>Login</h1>
   <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
@@ -15,7 +20,3 @@
       </div>
   </form>
 </div>
-
-<ng-map center="41,-87" zoom="3">
-  <marker position="[41,-87]" title="hello"></marker>
-</ng-map>
