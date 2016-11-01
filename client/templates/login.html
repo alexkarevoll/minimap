@@ -1,14 +1,34 @@
 
-<div class="col-md-8">
-  <ng-map center="current-location" zoom="14">
-    <marker fillColor="green" title="you are here" position="current-location" title="hello"></marker>
-    <marker ng-repeat="p in loginCtrl.eventLocations.data" title="{{ p.name }}" position="{{ p.location }}" title="hello"></marker>
+<div class="col-md-9">
+
+  <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
+  <ng-map center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="14">
+
+    <!-- a marker with your current location -->
+    <!-- <marker fillColor="green" title="you are here" position="current-location" title="hello"></marker> -->
+
+    <marker ng-repeat="p in loginCtrl.eventLocations.data"
+            on-click="loginCtrl.showDetail(p)"
+            title="{{ p.name }}"
+            id='{{p._id}}'
+            position="{{ p.location }}" >
+    </marker>
+
+    <info-window id="event-iw">
+        <div ng-non-bindable="">
+          <!-- id: {{ p._id }}<br/> -->
+          <!-- name: {{ p.name }}<br/> -->
+          <!-- Position 1: {{p.location}}<br/> -->
+          <!-- <a href="#" ng-click="loginCtrl.clicked()">Details</a> -->
+        </div>
+      </info-window>
+
   </ng-map>
   <ul> Locations
-    <li ng-repeat="p in loginCtrl.eventLocations.data">{{ p.location }}: {{ p.name }}</li>
+    <li ng-repeat="p in loginCtrl.eventLocations.data">{{ p }}</li>
   </ul>
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
   <h1>Login</h1>
   <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
   <form class="form" ng-submit="loginCtrl.login()">
