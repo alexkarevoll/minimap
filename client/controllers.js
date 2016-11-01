@@ -29,35 +29,37 @@ function loginController($http, $state, AuthService, NgMap) {
   var vm = this
 
   // MAP STUFF ----------------------------------------------
-  // get json object full of events from api
-  // for the map to use
+
+  NgMap.getMap().then(function(map) {
+    console.log('map', map)
+    vm.map = map
+  })
+
+  vm.clicked = function() {
+    alert('Clicked a link inside infoWindow')
+  }
+  // vm.showCity = function(event, city) {
+  //       vm.selectedCity = city;
+  //       vm.map.showInfoWindow('myInfoWindow', this);
+  //   };
+
   var data = {} // only here so it doesn't break
   $http.get('api/events', data)
     .then(function(data){
+      // get all events in json format
+      vm.eventLocations = data.data
+      // set the selected location to the first location for now
+      vm.selectedLocation = vm.eventLocations[0]
 
-      vm.eventLocations = data
-
-      NgMap.getMap().then(function(map) {
-        console.log('map', map)
-        vm.map = map
-      })
-
-      vm.clicked = function() {
-        alert('Clicked a link inside infoWindow')
-      }
-
-      vm.eventLocation = vm.eventLocations[0]
-
-      vm.showDetail = function(e, eventLocation) {
-        vm.eventLocation = eventLocation;
-        vm.map.showInfoWindow('event-iw', eventLocation._id);
+      vm.showDetail = function(event, eventLocation) {
+        vm.selectedLocation = eventLocation;
+        vm.map.showInfoWindow('event-iw', this);
       }
 
       vm.hideDetail = function() {
         vm.map.hideInfoWindow('event-iw');
       }
-
-    })
+      })
 
   // login functionality ------------------------------------
   vm.login = function () {

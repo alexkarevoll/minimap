@@ -5,27 +5,30 @@
   <ng-map center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="14">
 
     <!-- a marker with your current location -->
-    <!-- <marker fillColor="green" title="you are here" position="current-location" title="hello"></marker> -->
+    <shape id="circle" name="circle" centered="true"
+      stroke-color='#42a5f5' stroke-opacity="0.95"stroke-weight="4"
+      center="current-position" radius="40"></shape>
 
-    <marker ng-repeat="p in loginCtrl.eventLocations.data"
-            on-click="loginCtrl.showDetail(p)"
+    <marker ng-repeat="p in loginCtrl.eventLocations"
+            on-click="loginCtrl.showDetail(event, p)"
             title="{{ p.name }}"
             id='{{p._id}}'
             position="{{ p.location }}" >
     </marker>
 
     <info-window id="event-iw">
-        <div ng-non-bindable="">
-          <!-- id: {{ p._id }}<br/> -->
-          <!-- name: {{ p.name }}<br/> -->
-          <!-- Position 1: {{p.location}}<br/> -->
+        <div ng-non-bindable>
+          <!-- Stuff in the info window! -->
+          <!-- id: {{ loginCtrl.eventLocations.data._id }}<br/> -->
+          <!-- name: {{ loginCtrl.selectedLocation.name }} -->
+          <!-- Position 1: {{loginCtrl.eventLocations.data.location}}<br/> -->
           <!-- <a href="#" ng-click="loginCtrl.clicked()">Details</a> -->
         </div>
       </info-window>
 
   </ng-map>
   <ul> Locations
-    <li ng-repeat="p in loginCtrl.eventLocations.data">{{ p }}</li>
+    <li ng-repeat="p in loginCtrl.eventLocations">{{ p }}</li>
   </ul>
 </div>
 <div class="col-md-3">
