@@ -6,14 +6,14 @@ angular.module('myApp')
   .controller('postController', postController)
 
 
-  mainController.$inject = ['$rootScope', '$state', 'AuthService']
+  mainController.$inject = ['$rootScope', '$state', 'AuthService', '$http']
   loginController.$inject = ['$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
 
 
-function mainController($rootScope, $state, AuthService) {
+function mainController($rootScope, $state, AuthService, $http) {
   var vm = this
   $rootScope.$on('$stateChangeStart', function (event) {
     // console.log("Changing states")
@@ -22,6 +22,12 @@ function mainController($rootScope, $state, AuthService) {
         vm.currentUser = data.data.user
       })
   })
+  // TODO DOESNT WORK YET
+  // $http.get('/api/events', events)
+  //   .then(function(data) {
+  //     console.log("The main controller got this data from /api/events")
+  //     console.log(events)
+  //   })
 }
 
 // LOGIN CONTROLLER:

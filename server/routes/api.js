@@ -70,10 +70,12 @@ router.get('/status', function(req, res) {
 
 // get all events
 router.get('/events', function(req, res){
-  // need to find it by the user
-  Event.find({}, function(err, data){
+  // res.send('hello from .get /events')
+  Event.find({}, function(err, events){
     if(err) return console.log(err)
-    res.json(data)
+    console.log("api.js .get /events data")
+    console.log(events)
+    res.json(events)
   })
 })
 
