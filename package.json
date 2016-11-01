@@ -9,6 +9,7 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "geocoder": "^0.2.2",
     "mongoose": "^4.4.5",
     "morgan": "^1.7.0",
     "ngmap": "^1.17.8",

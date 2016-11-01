@@ -4,11 +4,8 @@ var Schema = mongoose.Schema
 
 var Event = new Schema({
   by_: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  location: { type: [Number], required: true },
-  // location: {
-  //   lat: Number,
-  //   lng: Number
-  // }
+  address: { type: String },
+  location: [{ type: Number, required: true }],
   name: { type: String }
 })
 

@@ -1,8 +1,11 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
+var geocoder = require('geocoder')
 var User = require('../models/User.js')
 var Event = require('../models/Event.js')
+
+// AUTHENTICATION ============================================
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
@@ -63,8 +66,9 @@ router.get('/status', function(req, res) {
   })
 })
 
-// EVENTS
+// EVENTS =================================================
 
+// get all events
 router.get('/events', function(req, res){
   // need to find it by the user
   Event.find({}, function(err, data){
@@ -73,25 +77,63 @@ router.get('/events', function(req, res){
   })
 })
 
+// get just that user's events
 router.get('/myevents', function(req, res){
   User.findById(req.user._id).populate("events").exec(function(err, user){
     res.json(user.events)
   })
 })
 
+// post a new event
 router.post('/events', function(req, res){
-  // need to find it by the user
   User.findById(req.user._id, function(err, user){
     if (err) return console.log(err)
+    // create a newEvent variable with the data from the controller
     var newEvent = new Event(req.body)
-    newEvent.by_ = user
-    newEvent.save(function(err, event){
-      user.events.push(event)
-      user.save(function(err, user){
-        res.json(event)
+    // set its by property to the currently logged in user
+    newEvent.by_ = user._id
+    // log whats incoming from the controller
+    console.log("Here Comes req.body.location in api.js");
+    console.log(req.body.address)
+    // run geocoder to take their address and find it's latitude and longitude
+    geocoder.geocode(req.body.address, function ( err, data ) {
+      console.log("Here is the geocoder data.results[0].geometry.location.lat then lng:")
+      // drill into the response for the first objects latitude and longitude
+      console.log(data.results[0].geometry.location.lat)
+      console.log(data.results[0].geometry.location.lng)
+      // then push that location data into the new event object's location property
+      // newEvent.location.push(data.results[0].geometry.location.lat)
+      // newEvent.location.push(data.results[0].geometry.location.lng)
+      newEvent.location = [
+        data.results[0].geometry.location.lat,
+        data.results[0].geometry.location.lng
+      ]
+
+      console.log("Here is newEvent after geocoder gets done with it:")
+      console.log(newEvent)
+      // then save that newEvent object
+      newEvent.save(function(err, event){
+        user.events.push(event)
+        user.save(function(err, user){
+          res.json(event)
+        })
       })
-    })
+    });
   })
+  // User.findById(req.user._id, function(err, user){
+  //   if (err) return console.log(err)
+  //   var newEvent = new Event(req.body)
+  //   newEvent.by_ = user
+  //   newEvent.save(function(err, event){
+  //     user.events.push(event)
+  //     user.save(function(err, user){
+  //       res.json(event)
+  //     })
+  //   })
+  // })
 })
 
+// add an event to your quest log
+
+// EXPORT ======================================================
 module.exports = router

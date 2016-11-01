@@ -4,20 +4,17 @@ angular.module('myApp')
   .controller('logoutController', logoutController)
   .controller('registerController', registerController)
   .controller('postController', postController)
-  .controller('eventController', eventController)
 
 
-  mainController.$inject = ['$rootScope', '$state', 'AuthService', 'gservice']
+  mainController.$inject = ['$rootScope', '$state', 'AuthService']
   loginController.$inject = ['$state', 'AuthService']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
-  postController.$inject = ['$http', 'AuthService', 'gservice']
-  eventController.$inject = ['$http', '$scope', '$rootScope', 'gservice']
+  postController.$inject = ['$http', 'AuthService']
 
 
-function mainController($rootScope, $state, AuthService, gservice) {
+function mainController($rootScope, $state, AuthService) {
   var vm = this
-  console.log(gservice)
   $rootScope.$on('$stateChangeStart', function (event) {
     // console.log("Changing states")
     AuthService.getUserStatus()
@@ -99,7 +96,7 @@ function registerController($state, AuthService) {
 
 // POST CONTROLLER:
 
-function postController($http, AuthService, gservice){
+function postController($http, AuthService){
   var vm = this
   vm.title = "Post Controller Is Here"
   vm.currentUser = {}
@@ -117,78 +114,16 @@ function postController($http, AuthService, gservice){
   vm.addEvent = function() {
     var newEvent = {
       by_ : vm.currentUser,
-      location: [vm.newEvent.latitude, vm.newEvent.longitude],
+      address: vm.newEvent.address,
       name: vm.newEvent.name
     }
+    console.log("The newEvent in controller.js");
+    console.log(newEvent)
     $http.post('/api/events', newEvent)
       .success(function(data){
+        console.log("Here is the .success data in postController.addEvent.success")
         console.log(data)
         vm.currentUser.events.push(data)
       })
   }
 }
-
-function eventController($http, $scope, $rootScope, gservice){
-
-    vm = this
-
-    vm.formData = {}
-    var coords = {}
-    var lat = 0
-    var long = 0
-
-    vm.formData.latitude = 39.500
-    vm.formData.longitude = -98.350
-
-  //   // Get User's actual coordinates based on HTML5 at window load
-  //   geolocation.getLocation().then(function(data){
-  //
-  //     // Set the latitude and longitude equal to the HTML5 coordinates
-  //     coords = {lat:data.coords.latitude, long:data.coords.longitude};
-  //
-  //     // Display coordinates in location textboxes rounded to three decimal points
-  //     vm.formData.longitude = parseFloat(coords.long).toFixed(3);
-  //     vm.formData.latitude = parseFloat(coords.lat).toFixed(3);
-  //
-  //     // Display message confirming that the coordinates verified.
-  //     vm.formData.htmlverified = "Yep (Thanks for giving us real data!)";
-  //
-  //     gservice.refresh(vm.formData.latitude, vm.formData.longitude);
-  //
-  // });
-
-    // Get coordinates based on mouse click. When a click event is detected....
-    $rootScope.$on("clicked", function(){
-
-      // Run the gservice functions associated with identifying coordinates
-      $scope.$apply(function(){
-          vm.formData.latitude = parseFloat(gservice.clickLat).toFixed(3)
-          vm.formData.longitude = parseFloat(gservice.clickLong).toFixed(3)
-      })
-  })
-
-    vm.createUser = function() {
-
-      var userData = {
-        username: vm.formData.username,
-        gender: vm.formData.gender,
-        age: vm.formData.age,
-        favlang: vm.formData.favlang,
-        location: [vm.formData.longitude, vm.formData.latitude],
-        htmlverified: vm.formData.htmlverified
-      }
-
-      $http.post('/users', userData)
-        .success(function (data) {
-          vm.formData.username = ""
-          vm.formData.gender = ""
-          vm.formData.age = ""
-          vm.formData.favlang = ""
-          // refresh the map with the new data
-          gservice.refresh(vm.formData.latitude, vm.formData.longitude)
-        })
-        .error(function(data) {
-          console.log("Error: " + data);
-        })
-    }
-  }
