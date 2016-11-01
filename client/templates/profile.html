@@ -5,11 +5,13 @@
 <div>
   <form ng-submit="postCtrl.addEvent()">
       <input ng-model="postCtrl.newEvent.name" type="text" placeholder="Event Name">
+      <input ng-model="postCtrl.newEvent.latitude" type="number" placeholder="latitude">
+      <input ng-model="postCtrl.newEvent.longitude" type="number" placeholder="longitude">
     <button type="submit" name="button">Submit</button>
   </form>
 </div>
 <div>
   <ul>
-    <li ng-repeat="event in postCtrl.currentUser.events">{{ event.name }}</li>
+    <li ng-repeat="event in postCtrl.currentUser.events">{{ event.name }} : {{ event.location[0] }}, {{ event.location[1] }} </li>
   </ul>
 </div>

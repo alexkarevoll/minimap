@@ -10,9 +10,9 @@ angular.module('gservice', [])
         // Array of locations obtained from API calls
         var locations = [];
 
-        // Selected Location (initialize to center of America)
-        var selectedLat = 39.50;
-        var selectedLong = -98.35;
+        // Selected Location (initialize to Los Angeles)
+        var selectedLat = 34.50;
+        var selectedLong = -118.35;
 
         // Handling Clicks and location selection
         googleMapService.clickLat = 0
@@ -31,7 +31,7 @@ angular.module('gservice', [])
             selectedLong = longitude;
 
             // Perform an AJAX call to get all of the records in the db.
-            $http.get('/users').success(function(response){
+            $http.get('/api/events').success(function(response){
 
                 // Convert the results into Google Map Format
                 locations = convertToMapPoints(response);
@@ -49,29 +49,32 @@ angular.module('gservice', [])
             // Clear the locations holder
             var locations = [];
 
+            console.log("Banana")
+            console.log(response[1])
+
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.length; i++) {
-                var user = response[i];
+                var event = response[i];
 
                 // Create popup windows for each record
                 var  contentString =
-                    '<p><b>Username</b>: ' + user.username +
-                    '<br><b>Age</b>: ' + user.age +
-                    '<br><b>Gender</b>: ' + user.gender +
-                    '<br><b>Favorite Language</b>: ' + user.favlang +
-                    '</p>';
+                    '<p><b>Name</b>: ' + event.name
+                    // '<br><b>Age</b>: ' + user.age +
+                    // '<br><b>Gender</b>: ' + user.gender +
+                    // '<br><b>Favorite Language</b>: ' + user.favlang +
+                    // '</p>';
 
                 // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
                 locations.push({
-                    latlon: new google.maps.LatLng(user.location[1], user.location[0]),
+                    latlon: new google.maps.LatLng(event.location[1], event.location[0]),
                     message: new google.maps.InfoWindow({
                         content: contentString,
                         maxWidth: 320
                     }),
-                    username: user.username,
-                    gender: user.gender,
-                    age: user.age,
-                    favlang: user.favlang
+                    name: event.name
+                    // gender: user.gender,
+                    // age: user.age,
+                    // favlang: user.favlang
             });
         }
         // location is now an array populated with records in Google Maps format
