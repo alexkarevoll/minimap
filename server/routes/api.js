@@ -4,6 +4,7 @@ var passport = require('passport')
 var geocoder = require('geocoder')
 var User = require('../models/User.js')
 var Event = require('../models/Event.js')
+var request = require('request')
 
 // AUTHENTICATION ============================================
 
@@ -68,7 +69,7 @@ router.get('/status', function(req, res) {
 
 // EVENTS =================================================
 
-// get all events
+// get all user made events
 router.get('/events', function(req, res){
   // res.send('hello from .get /events')
   Event.find({}, function(err, events){
@@ -121,17 +122,21 @@ router.post('/events', function(req, res){
       })
     });
   })
-  // User.findById(req.user._id, function(err, user){
-  //   if (err) return console.log(err)
-  //   var newEvent = new Event(req.body)
-  //   newEvent.by_ = user
-  //   newEvent.save(function(err, event){
-  //     user.events.push(event)
-  //     user.save(function(err, user){
-  //       res.json(event)
-  //     })
-  //   })
-  // })
+})
+
+// MEETUP EVENTS -----------------------------------------------
+router.get('/meetup', function(req,res){
+  var requestURL = 'https://api.meetup.com/2/open_events?zip='
+  +'90034' // zipcode
+  +'&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&page=20&radius=25.0&category='
+  +'29%2C11'// category 11 and 29
+  +'&desc=False&status=upcoming&sig_id=12397731&sig=440f704779683fded801b0f149d8cc55a86d4228&key'
+  + process.env.MEETUP_API
+request(requestURL, function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    res.json(JSON.parse(body))
+  }
+})
 })
 
 // add an event to your quest log

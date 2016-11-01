@@ -61,6 +61,9 @@ function loginController($http, $state, AuthService, NgMap) {
       }
       })
 
+  // Meetup API STUFF
+
+
   // login functionality ------------------------------------
   vm.login = function () {
 
