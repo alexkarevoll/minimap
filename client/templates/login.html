@@ -58,6 +58,7 @@
     <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
     <h3>Date:</h3>
     <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
+    <a href="{{ loginCtrl.eventDetails.event_url }}" class="btn btn-danger">Join!</a>
     <!-- <h3>Details</h3>
     <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
   </div>
