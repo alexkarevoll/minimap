@@ -36,6 +36,7 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
   })
 
   var data = {} // only here so it doesn't break
+  vm.eventDetails = { "name": "click a marker for details"}
   $http.get('api/events', data)
     .then(function(data){
       // get all events in json format
@@ -62,7 +63,7 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
 
   // Modal Stuff --------------------------------------------
 
-  vm.items = ['item1', 'item2', 'item3'];
+  vm.items = ['Cat', 'Puppy', 'Turtle'];
 
   vm.animationsEnabled = true;
 
@@ -73,7 +74,7 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
       animation: vm.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: '/templates/myModalContent.html',
+      templateUrl: 'myModalContent.html',
       controller: 'loginController',
       controllerAs: 'loginCtrl',
       size: size,
@@ -116,6 +117,10 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
         vm.loginForm = {}
       })
   }
+  AuthService.getUserStatus()
+    .then(function(data){
+      vm.currentUser = data.data.user
+    })
 }
 
 

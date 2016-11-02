@@ -9,19 +9,21 @@
       stroke-color='#42a5f5' stroke-opacity="0.95"stroke-weight="4"
       center="current-position" radius="40"></shape>
 
-    <!-- markers for each event -->
+    <!-- markers for user events -->
     <marker ng-repeat="p in loginCtrl.eventLocations"
             on-click="loginCtrl.showDetail(event, p)"
             title="{{ p.name }}"
             id='{{p._id}}'
-            position="{{ p.location }}" >
+            position="{{ p.location }}"
+            icon="./img/rsz_minimap-quest.png" >
     </marker>
     <!-- markers for meetup events -->
     <marker ng-repeat="p in loginCtrl.meetupLocations"
             on-click="loginCtrl.showDetail(event, p)"
             title="{{ p.name }}"
             id='{{ p.id }}'
-            position="[{{ p.venue.lat }}, {{ p.venue.lon }}]" >
+            position="[{{ p.venue.lat }}, {{ p.venue.lon }}]"
+            icon="./img/rsz_meetup-quest.png" >
     </marker>
 
   </ng-map>
@@ -31,34 +33,35 @@
 
 </div>
 <div class="col-md-2 login-window">
-  <h2>Login</h2>
-  <h3>and contribute!</h3>
-  <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
-  <form class="form" ng-submit="loginCtrl.login()">
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" class="form-control" name="username" ng-model="loginCtrl.loginForm.username" required>
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-        <input type="password" class="form-control" name="password" ng-model="loginCtrl.loginForm.password" required>
+  <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
+    <h2>Login</h2>
+    <h3>and contribute!</h3>
+    <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
+    <form class="form" ng-submit="loginCtrl.login()">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" ng-model="loginCtrl.loginForm.username" required>
       </div>
-      <div>
-        <button type="submit" class="btn btn-default" ng-disabled="loginCtrl.disabled">Login</button>
-        <button ui-sref="register" class="btn btn-info">Sign-Up</button>
-      </div>
-  </form>
+      <div class="form-group">
+        <label>Password</label>
+          <input type="password" class="form-control" name="password" ng-model="loginCtrl.loginForm.password" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-default" ng-disabled="loginCtrl.disabled">Login</button>
+          <button ui-sref="register" class="btn btn-info">Sign-Up</button>
+        </div>
+    </form>
+  </div>
 
   <div class="quest-details">
     <h2>Quest</h2>
-    <p>Click a marker for details</p>
     <h3>Name: </h3>
     <h4>{{loginCtrl.eventDetails.name}} </h4>
     <h3>Location:
     <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
     <h3>Date:</h3>
     <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
-    <!-- <a href="{{ loginCtrl.eventDetails.event_url }}" class="btn btn-danger">Join!</a> -->
+    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" class="btn btn-danger">Join!</a>
     <!-- <h3>Details</h3>
     <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
     <!-- Button trigger modal -->
@@ -66,3 +69,24 @@
   </div>
 
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Quest Details!</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+      <ul>
+          <li ng-repeat="item in loginCtrl.items">
+              <a href="#" ng-click="$event.preventDefault(); loginCtrl.selected.item = item">{{ item }}</a>
+          </li>
+      </ul>
+      Selected: <b>{{ loginCtrl.selected.item }}</b>
+
+      <h3>Name: </h3>
+      <h4>{{loginCtrl.eventDetails || "Nothing here..."}} </h4>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="">Accept</button>
+      <button class="btn btn-warning" type="button" ng-click="">Dismiss</button>
+  </div>
+</script>

@@ -1,5 +1,7 @@
 var myApp = angular.module('myApp', ['ui.router', 'ngMap', 'ui.bootstrap'])
 
+myApp.directive('navigationBar', navigationBar)
+
 myApp.config(function ($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/')
@@ -37,6 +39,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
 
 })
+
+function navigationBar(){
+  return{
+    restrict: 'E',
+    templateUrl: 'partials/navbar.html'
+  }
+}
 
 myApp.run(function ($rootScope, $location, $state, AuthService) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
