@@ -53,9 +53,10 @@ function loginController($http, $state, AuthService, NgMap) {
 
   // Meetup API STUFF --------------------------------------
   var meetupData = {}
-  $http.get('api/events', meetupData)
+  $http.get('api/meetup', meetupData)
     .then(function(meetupData){
-      vm.meetupLocation = meetupData
+      console.log("someone went to 'api/meetup'!")
+      vm.meetupLocations = meetupData.data.results
     })
 
 

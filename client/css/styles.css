@@ -13,10 +13,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A3CCFF', end
   margin: 0;
 }
 
-.quest-details{
-  height: 390px;
+.login-window{
+  border: 1px solid #212121;
+  background: #CBE6A3;
+  border-radius: 5px;
 }
 
-.login-window{
-  background: #CBE6A3;
+.quest-details{
+  height: 390px;
 }

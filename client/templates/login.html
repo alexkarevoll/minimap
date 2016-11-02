@@ -2,7 +2,7 @@
 <div class="col-md-10">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
-  <ng-map class="map"default-style="false" center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="14">
+  <ng-map class="map"default-style="false" center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="12">
 
     <!-- a marker with your current location -->
     <shape id="circle" name="circle" centered="true"
@@ -16,8 +16,18 @@
             id='{{p._id}}'
             position="{{ p.location }}" >
     </marker>
+    <!-- markers for meetup events -->
+    <marker ng-repeat="p in loginCtrl.meetupLocations"
+            on-click="loginCtrl.showDetail(event, p)"
+            title="{{ p.name }}"
+            id='{{ p.id }}'
+            position="[{{ p.venue.lat }}, {{ p.venue.lon }}]" >
+    </marker>
 
   </ng-map>
+  <ul>
+    <li ng-repeat="p in loginCtrl.meetupLocations">{{ p.venue.address_1 }}</li>
+  </ul>
 
 </div>
 <div class="col-md-2 login-window">
@@ -39,14 +49,17 @@
       </div>
   </form>
 
-  <!-- <li ng-repeat="p in loginCtrl.eventLocations">{{ p }}</li> -->
   <div class="quest-details">
-    <h2>Quest Details</h2>
+    <h2>Quest</h2>
     <p>Click a marker for details</p>
     <h3>Name: </h3>
     <h4>{{loginCtrl.eventDetails.name}} </h4>
     <h3>Location:
-    <h4>{{ loginCtrl.eventDetails.address }}</h4>
+    <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
+    <h3>Date:</h3>
+    <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
+    <!-- <h3>Details</h3> -->
+    <!-- <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
   </div>
 
 </div>
