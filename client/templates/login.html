@@ -2,13 +2,25 @@
 <div class="col-md-10">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
-  <ng-map class="map"default-style="false" center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="12">
+  <ng-map class="map"
+          default-style="false"
+          center="{{ 'current-location' || '[34.0194,-118.4911]'}}"
+          zoom="11"
+          styles='[{"elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"color":"#f5f5f2"},{"visibility":"on"}]},{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"poi.attraction","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","stylers":[{"visibility":"off"}]},{"featureType":"poi.school","stylers":[{"visibility":"off"}]},{"featureType":"poi.sports_complex","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#ffffff"},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"visibility":"simplified"},{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"color":"#ffffff"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.park","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#71c8d4"}]},{"featureType":"landscape","stylers":[{"color":"#e5e8e7"}]},{"featureType":"poi.park","stylers":[{"color":"#8ba129"}]},{"featureType":"road","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.sports_complex","elementType":"geometry","stylers":[{"color":"#c7c7c7"},{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#a0d3d3"}]},{"featureType":"poi.park","stylers":[{"color":"#91b65d"}]},{"featureType":"poi.park","stylers":[{"gamma":1.51}]},{"featureType":"road.local","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"poi.government","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"landscape","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"road.local","stylers":[{"visibility":"simplified"}]},{"featureType":"road"},{"featureType":"road"},{},{"featureType":"road.highway"}]'
+          >
 
     <!-- a marker with your current location -->
-    <shape id="circle" name="circle" centered="true"
+    <!-- <shape id="circle" name="circle" centered="true"
       stroke-color='#42a5f5' stroke-opacity="0.95"stroke-weight="4"
-      center="current-position" radius="40"></shape>
+      center="current-position" radius="40"></shape> -->
 
+
+    <marker animation="Animation.DROP"
+            title="you are here"
+            id='avatar'
+            position="current-location"
+            icon="./img/rsz_link-pixel.png" >
+    </marker>
     <!-- markers for user events -->
     <marker ng-repeat="p in loginCtrl.eventLocations"
             on-click="loginCtrl.showDetail(event, p)"
@@ -61,7 +73,7 @@
     <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
     <h3>Date:</h3>
     <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
-    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" class="btn btn-danger">Join!</a>
+    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" target="_blank" class="btn btn-danger">Join!</a>
     <!-- <h3>Details</h3>
     <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
     <!-- Button trigger modal -->
