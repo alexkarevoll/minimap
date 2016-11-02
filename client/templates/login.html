@@ -1,8 +1,8 @@
 
-<div class="col-md-9">
+<div class="col-md-10">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
-  <ng-map default-style="false" center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="14">
+  <ng-map class="map"default-style="false" center="{{ 'current-location' || '[34.0194,-118.4911]'}}" zoom="14">
 
     <!-- a marker with your current location -->
     <shape id="circle" name="circle" centered="true"
@@ -19,13 +19,10 @@
 
   </ng-map>
 
-  <!-- <li ng-repeat="p in loginCtrl.eventLocations">{{ p }}</li> -->
-  <h2>Quest Details</h2>
-  <p>Name: {{loginCtrl.eventDetails.name}} - Location: {{ loginCtrl.eventDetails.address }}</p>
-
 </div>
-<div class="col-md-3">
-  <h1>Login</h1>
+<div class="col-md-2 login-window">
+  <h2>Login</h2>
+  <h3>and contribute!</h3>
   <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
   <form class="form" ng-submit="loginCtrl.login()">
     <div class="form-group">
@@ -38,6 +35,18 @@
       </div>
       <div>
         <button type="submit" class="btn btn-default" ng-disabled="loginCtrl.disabled">Login</button>
+        <button ui-sref="register" class="btn btn-info">Sign-Up</button>
       </div>
   </form>
+
+  <!-- <li ng-repeat="p in loginCtrl.eventLocations">{{ p }}</li> -->
+  <div class="quest-details">
+    <h2>Quest Details</h2>
+    <p>Click a marker for details</p>
+    <h3>Name: </h3>
+    <h4>{{loginCtrl.eventDetails.name}} </h4>
+    <h3>Location:
+    <h4>{{ loginCtrl.eventDetails.address }}</h4>
+  </div>
+
 </div>
