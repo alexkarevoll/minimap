@@ -12,7 +12,7 @@ angular.module('myApp')
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
 
-
+// MAIN CONTROLLER: ========================================
 function mainController($rootScope, $state, AuthService) {
   var vm = this
   $rootScope.$on('$stateChangeStart', function (event) {
@@ -24,7 +24,7 @@ function mainController($rootScope, $state, AuthService) {
   })
 }
 
-// LOGIN CONTROLLER:
+// LOGIN CONTROLLER: ========================================
 function loginController($http, $state, AuthService, NgMap) {
   var vm = this
 
@@ -35,14 +35,6 @@ function loginController($http, $state, AuthService, NgMap) {
     vm.map = map
   })
 
-  vm.clicked = function() {
-    alert('Clicked a link inside infoWindow')
-  }
-  // vm.showCity = function(event, city) {
-  //       vm.selectedCity = city;
-  //       vm.map.showInfoWindow('myInfoWindow', this);
-  //   };
-
   var data = {} // only here so it doesn't break
   $http.get('api/events', data)
     .then(function(data){
@@ -52,16 +44,19 @@ function loginController($http, $state, AuthService, NgMap) {
       vm.selectedLocation = vm.eventLocations[0]
 
       vm.showDetail = function(event, eventLocation) {
-        vm.selectedLocation = eventLocation;
-        vm.map.showInfoWindow('event-iw', this);
+        vm.selected = eventLocation._id
+        console.log(eventLocation)
+        vm.eventDetails = eventLocation
       }
 
-      vm.hideDetail = function() {
-        vm.map.hideInfoWindow('event-iw');
-      }
-      })
+  })
 
-  // Meetup API STUFF
+  // Meetup API STUFF --------------------------------------
+  var meetupData = {}
+  $http.get('api/events', meetupData)
+    .then(function(meetupData){
+      vm.meetupLocation = meetupData
+    })
 
 
   // login functionality ------------------------------------
@@ -153,7 +148,9 @@ function postController($http, AuthService){
     var newEvent = {
       by_ : vm.currentUser,
       address: vm.newEvent.address,
-      name: vm.newEvent.name
+      name: vm.newEvent.name,
+      date: vm.newEvent.date,
+      description: vm.newEvent.description
     }
     console.log("The newEvent in controller.js");
     console.log(newEvent)

@@ -126,17 +126,16 @@ router.post('/events', function(req, res){
 
 // MEETUP EVENTS -----------------------------------------------
 router.get('/meetup', function(req,res){
-  var requestURL = 'https://api.meetup.com/2/open_events?zip='
-  +'90034' // zipcode
-  +'&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&page=20&radius=25.0&category='
-  +'29%2C11'// category 11 and 29
-  +'&desc=False&status=upcoming&sig_id=12397731&sig=440f704779683fded801b0f149d8cc55a86d4228&key'
+
+  // requestURL is currently looking 25miles around 90034 for 50 Fantasy/SciFi and Games events
+  var requestURL = 'https://api.meetup.com/2/open_events?zip=90034&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&page=50&radius=25.0&category=29%2C11&desc=False&status=upcoming&sig_id=12397731&sig=a0e249921319daef646fffe7dba0a05d541085e7&key'
   + process.env.MEETUP_API
-request(requestURL, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    res.json(JSON.parse(body))
-  }
-})
+
+  request(requestURL, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.json(JSON.parse(body))
+    }
+  })
 })
 
 // add an event to your quest log
