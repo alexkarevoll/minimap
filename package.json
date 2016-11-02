@@ -4,6 +4,7 @@
     "start": "node server/server.js"
   },
   "dependencies": {
+    "angular-ui-bootstrap": "^2.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",

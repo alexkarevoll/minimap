@@ -7,7 +7,7 @@ angular.module('myApp')
 
 
   mainController.$inject = ['$rootScope', '$state', 'AuthService']
-  loginController.$inject = ['$http', '$state', 'AuthService', 'NgMap']
+  loginController.$inject = ['$http', '$state', 'AuthService', 'NgMap', '$uibModal', '$log', '$document']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
@@ -25,7 +25,7 @@ function mainController($rootScope, $state, AuthService) {
 }
 
 // LOGIN CONTROLLER: ========================================
-function loginController($http, $state, AuthService, NgMap) {
+function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $document) {
   var vm = this
 
   // MAP STUFF ----------------------------------------------
@@ -59,6 +59,37 @@ function loginController($http, $state, AuthService, NgMap) {
       vm.meetupLocations = meetupData.data.results
     })
 
+
+  // Modal Stuff --------------------------------------------
+
+  vm.items = ['item1', 'item2', 'item3'];
+
+  vm.animationsEnabled = true;
+
+  vm.open = function (size, parentSelector) {
+    var parentElem = parentSelector ?
+      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+    var modalInstance = $uibModal.open({
+      animation: vm.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: '/templates/myModalContent.html',
+      controller: 'loginController',
+      controllerAs: 'loginCtrl',
+      size: size,
+      appendTo: parentElem,
+      resolve: {
+        items: function () {
+          return vm.items;
+        }
+      }
+    });
+    modalInstance.result.then(function (selectedItem) {
+        vm.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
 
   // login functionality ------------------------------------
   vm.login = function () {

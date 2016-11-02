@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'ngMap'])
+var myApp = angular.module('myApp', ['ui.router', 'ngMap', 'ui.bootstrap'])
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -28,10 +28,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
       url: '/one',
       template: '<h1>You should only be here if you are logged in!</h1>',
       restricted: true
-    })
-    .state('map', {
-      url: '/map',
-      templateUrl: 'templates/map.html'
     })
     .state('profile', {
       url: '/profile',

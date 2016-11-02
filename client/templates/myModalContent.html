@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Quest Details!</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <ul>
+        <li ng-repeat="item in loginCtrl.items">
+            <a href="#" ng-click="$event.preventDefault(); loginCtrl.selected.item = item">{{ item }}</a>
+        </li>
+    </ul>
+    Selected: <b>{{ loginCtrl.selected.item }}</b>
+    
+    <h3>Name: </h3>
+    <h4>{{loginCtrl.eventDetails.name}} </h4>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="">Accept</button>
+    <button class="btn btn-warning" type="button" ng-click="">Dismiss</button>
+</div>
