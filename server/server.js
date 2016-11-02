@@ -9,13 +9,15 @@ var hash = require('bcrypt-nodejs')
 var path = require('path')
 var passport = require('passport')
 var passportConfig = require('./config/passport.js')
+var dotenv = require('dotenv').load({silent: true})
 
 // mongoose -----------------------------------------
 const PORT = process.env.PORT || 3000
-const mongoConnectionString=process.env.MONGO_URL
+var mongoConnectionString = process.env.MONGO_URL
+console.log(process.env)
 
 
-mongoose.connect('mongodb://localhost/minimap', function(err){
+mongoose.connect(mongoConnectionString, function(err){
 	if(err) return console.log(err)
 	console.log("Connected to MongoDB")
 })

@@ -26,7 +26,7 @@
 
   </ng-map>
   <ul>
-    <li ng-repeat="p in loginCtrl.meetupLocations">{{ p.venue.address_1 }}</li>
+    <li ng-repeat="p in loginCtrl.meetupLocations">{{ p.event_url }}</li>
   </ul>
 
 </div>
@@ -58,8 +58,8 @@
     <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
     <h3>Date:</h3>
     <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
-    <!-- <h3>Details</h3> -->
-    <!-- <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
+    <!-- <h3>Details</h3>
+    <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
   </div>
 
 </div>

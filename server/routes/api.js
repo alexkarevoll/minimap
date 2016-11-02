@@ -5,6 +5,7 @@ var geocoder = require('geocoder')
 var User = require('../models/User.js')
 var Event = require('../models/Event.js')
 var request = require('request')
+var dotenv = require('dotenv').load({silent: true})
 
 // AUTHENTICATION ============================================
 
