@@ -125,11 +125,27 @@ router.post('/events', function(req, res){
   })
 })
 
+// return one specific event
+router.get('/myevents/:id', function(req, res){
+  Event.findById(req.params.id).populate('_by').exec(function(err, event) {
+      if(err) return console.log(err)
+      res.json(event)
+    })
+  })
+
+// delete one specific event
+router.delete('/myevents/:id', function(req,res){
+  Event.findByIdAndRemove(req.params.id, function (err){
+    if(err) return console.log(err)
+    res.json({ message: "Event Deleted" })
+  })
+})
+
 // MEETUP EVENTS -----------------------------------------------
 router.get('/meetup', function(req,res){
 
   // requestURL is currently looking 25miles around 90034 for 50 Fantasy/SciFi and Games events
-  var requestURL = 'https://api.meetup.com/2/open_events?zip=90034&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&page=50&radius=25.0&category=29%2C11&desc=False&status=upcoming&sig_id=12397731&sig=a0e249921319daef646fffe7dba0a05d541085e7&key'
+  var requestURL = 'https://api.meetup.com/2/open_events?zip=90012&and_text=False&offset=0&format=json&limited_events=False&photo-host=public&page=300&radius=30&category=29%2C11&desc=False&status=upcoming&sig_id=12397731&sig=49b8236038194500bee630e3d49a5ac9610a7d40&key'
   + process.env.MEETUP_API
 
   request(requestURL, function (error, response, body) {
