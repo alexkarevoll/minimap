@@ -50,24 +50,12 @@
 <div class="col-sm-3 login-window">
 
   <div class="quest-details">
-    <h2>Quest</h2>
-    <h3>Name: </h3>
-    <h5>{{loginCtrl.eventDetails.name}} </h5>
-    <h3>Location:
-    <h5>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h5>
-    <h3>Date:</h3>
-    <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
-    Show More Details<input type="checkbox" ng-model="details">
-    <div ng-show="details" class="">
-      <div class="">
-        <h3>Details</h3>
-        <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p>
-      </div>
-    </div>
-    <!-- Meetup Link if there is one -->
-    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" target="_blank" class="btn btn-danger">Join!</a>
+    <h3>Quick Details</h3>
+    <h5 ng-hide="loginCtrl.eventDetails.name">**click on a marker**</h5>
+    <h5>{{loginCtrl.eventDetails.name }} </h5>
+    <p>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}<br>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default" ng-click="loginCtrl.open()">Open me!</button>
+    <button type="button" class="btn btn-default" ng-show="loginCtrl.eventDetails.name" ng-click="loginCtrl.open('sm')">More Info!</button>
   </div>
 
   <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
@@ -97,21 +85,21 @@
 <!-- Modal: TODO cannot access user selected event -->
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header" ng-init="console.log($resolve)">
-      <h3 class="modal-title" id="modal-title">ALEX Details!</h3>
+      <h3 class="modal-title" id="modal-title">Quest Details</h3>
   </div>
   <div class="modal-body" id="modal-body">
-      <ul>
-          <li ng-repeat="item in loginCtrl.items">
-              <a href="#" ng-click="$event.preventDefault(); loginCtrl.selected.item = item">{{ item }}</a>
-          </li>
-      </ul>
-      Selected: <b>{{ loginCtrl.selected.item }}</b>
-
       <h3>Name: </h3>
-      <h4>{{ loginCtrl.banana || "Nothing here..."}} </h4>
+      <p>{{ loginCtrl.modalSelect.name || "No selected Quest..."}} </p>
+      <h3>Address: </h3>
+      <p><strong>{{ loginCtrl.eventDetails.address || loginCtrl.modalSelect.venue.name}}</strong><br>{{ loginCtrl.modalSelect.venue.address_1}}<br>{{ loginCtrl.modalSelect.venue.city}}, {{ loginCtrl.modalSelect.venue.state}} {{ loginCtrl.modalSelect.venue.zip}}</p>
+      <h3>Time: </h3>
+      <p>{{loginCtrl.eventDetails.date || loginCtrl.modalSelect.time | date : 'short'}} </p>
+      <!-- Meetup Link if there is one -->
+      <h3 ng-show="loginCtrl.modalSelect.event_url">Join</h3>
+      <a ng-show="loginCtrl.modalSelect.event_url" href="{{ loginCtrl.modalSelect.event_url }}" target="_blank" class="btn btn-danger">Meetup Link</a>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" type="button" ng-click="">Accept</button>
-      <button class="btn btn-warning" type="button" ng-click="">Dismiss</button>
+      <!-- <button class="btn btn-primary" type="button" ng-click="">Accept</button>
+      <button class="btn btn-warning" type="button" ng-click="">Dismiss</button> -->
   </div>
 </script>

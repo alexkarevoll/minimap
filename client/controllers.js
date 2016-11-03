@@ -64,12 +64,9 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
 
 
   // Modal Stuff --------------------------------------------
-
-  vm.items = ['Cat', 'Puppy', 'Turtle'];
-
   vm.animationsEnabled = true;
 
-  vm.banana = $rootScope.eventDetails
+  vm.modalSelect = $rootScope.eventDetails
 
   vm.open = function (size, parentSelector) {
     var parentElem = parentSelector ?
@@ -87,11 +84,6 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
         items: function () {
           return vm.items;
         },
-        event: function() {
-          console.log("Running the resolve.event method")
-          console.log($rootScope.eventDetails)
-          return vm.banana = $rootScope.eventDetails
-        }
       }
     });
     modalInstance.result.then(function (selectedItem) {
