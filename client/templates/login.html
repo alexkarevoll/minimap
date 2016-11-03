@@ -1,5 +1,5 @@
 
-<div class="col-sm-9">
+<div class="">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
   <ng-map class="map"
@@ -47,10 +47,10 @@
 
 </div>
 
-<div class="col-sm-3 login-window">
+<div class="login-window">
 
   <div class="quest-details">
-    <h3>Quick Details</h3>
+    <h4>Quest Details</h4>
     <h5 ng-hide="loginCtrl.eventDetails.name">**click on a marker**</h5>
     <h5>{{loginCtrl.eventDetails.name }} </h5>
     <p>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}<br>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
@@ -60,8 +60,8 @@
 
   <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
     <hr>
-    <h2>Login</h2>
-    <h3>and contribute!</h3>
+    <h4>Login</h4>
+    <h5>and contribute!</h5>
     <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
     <form class="form" ng-submit="loginCtrl.login()">
       <div class="form-group">

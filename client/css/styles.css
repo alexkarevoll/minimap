@@ -24,10 +24,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', end
 }
 
 .login-window{
-  border: 1px solid #212121;
-  background: #E5E3DF;
-  border-radius: 5px;
-  margin-left: -7px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 85px;
+  margin-left: 20px;
+  background: rgba(253,253,253,.7);
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 250px;
 }
 
 .quest-details{
