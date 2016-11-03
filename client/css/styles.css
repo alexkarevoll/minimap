@@ -8,6 +8,16 @@ background: linear-gradient(91deg, #A0D3D3 0%, #A0D3D3 30%, #AFCA89 100%); /* w3
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', endColorstr='#AFCA89',GradientType=1 ); /* ie6-9 */
 }
 
+@media (max-width: 767px) {
+    .navbar-right{
+        display:none;
+    }
+    .map{
+      height: 400px;
+      margin: 0;
+    }
+}
+
 .map{
   height:700px;
   margin: 0;
