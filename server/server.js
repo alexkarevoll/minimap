@@ -14,7 +14,7 @@ var dotenv = require('dotenv').load({silent: true})
 // mongoose -----------------------------------------
 const PORT = process.env.PORT || 3000
 var mongoConnectionString = process.env.MONGO_URL
-console.log(process.env)
+
 
 
 mongoose.connect(mongoConnectionString, function(err){

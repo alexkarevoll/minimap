@@ -7,7 +7,7 @@ angular.module('myApp')
 
 
   mainController.$inject = ['$rootScope', '$state', 'AuthService']
-  loginController.$inject = ['$http', '$state', 'AuthService', 'NgMap', '$uibModal', '$log', '$document']
+  loginController.$inject = ['$http', '$state', 'AuthService', 'NgMap', '$uibModal', '$log', '$document', '$rootScope']
   logoutController.$inject = ['$state', 'AuthService']
   registerController.$inject = ['$state', 'AuthService']
   postController.$inject = ['$http', 'AuthService']
@@ -25,7 +25,7 @@ function mainController($rootScope, $state, AuthService) {
 }
 
 // LOGIN CONTROLLER: ========================================
-function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $document) {
+function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $document, $rootScope) {
   var vm = this
 
   // MAP STUFF ----------------------------------------------
@@ -36,7 +36,7 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
   })
 
   var data = {} // only here so it doesn't break
-  vm.eventDetails = { "name": "click a marker for details"}
+  // vm.eventDetails = { "name": "click a marker for details"}
   $http.get('api/events', data)
     .then(function(data){
       // get all events in json format
@@ -44,13 +44,15 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
       // set the selected location to the first location for now
       vm.selectedLocation = vm.eventLocations[0]
 
-      vm.showDetail = function(event, eventLocation) {
-        vm.selected = eventLocation._id
-        console.log(eventLocation)
-        vm.eventDetails = eventLocation
-      }
+
 
   })
+  vm.showDetail = function(event, eventLocation) {
+    vm.selected = eventLocation._id
+    console.log(eventLocation)
+    vm.eventDetails = eventLocation
+    $rootScope.eventDetails = eventLocation
+  }
 
   // Meetup API STUFF --------------------------------------
   var meetupData = {}
@@ -82,6 +84,12 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
       resolve: {
         items: function () {
           return vm.items;
+        },
+        event: function() {
+          console.log("Running the resolve.event method")
+          console.log($rootScope.eventDetails)
+
+          return $rootScope.eventDetails
         }
       }
     });

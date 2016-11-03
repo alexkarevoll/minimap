@@ -2,24 +2,23 @@
 <div class="container">
   <div class="row">
     <div>
-      <h1>{{ postCtrl.currentUser.username }}'s Quests</h1>
-      <a ui-sref="login" class="btn btn-success">Return to Map</a>
+      <h1>{{ postCtrl.currentUser.username }}'s Quests <a ui-sref="login" class="btn btn-success">Return to Map</a></h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
       <form ng-submit="postCtrl.addEvent()">
         <div class="form-group">
           <input class="form-control" ng-model="postCtrl.newEvent.name" type="text" placeholder="Event Name">
           <input class="form-control" ng-model="postCtrl.newEvent.address" type="text" placeholder="Address (precise as possible)">
           <input class="form-control" ng-model="postCtrl.newEvent.date" type="date">
-          <input class="form-control" ng-model="postCtrl.newEvent.description" type="text" placeholder="description">
+          <textarea class="form-control" ng-model="postCtrl.newEvent.description" type="text" placeholder="description"></textarea>
           <p>**Remember all quests are public, please don't post your home address**<p>
           <button class="btn btn-default"type="submit" name="button">Submit New Quest</button>
         </div>
       </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
       <h3>Your Given Quests</h3>
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="event in postCtrl.currentUser.events"> Event Name: {{ event.name }} | Event Address: {{ event.address}}</li>

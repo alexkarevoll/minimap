@@ -1,5 +1,5 @@
 
-<div class="col-md-10">
+<div class="col-md-9">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
   <ng-map class="map"
@@ -44,8 +44,32 @@
   </ul>
 
 </div>
-<div class="col-md-2 login-window">
+
+<div class="col-md-3 login-window">
+
+  <div class="quest-details">
+    <h2>Quest</h2>
+    <h3>Name: </h3>
+    <h5>{{loginCtrl.eventDetails.name}} </h5>
+    <h3>Location:
+    <h5>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h5>
+    <h3>Date:</h3>
+    <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
+    Show More Details<input type="checkbox" ng-model="details">
+    <div ng-show="details" class="">
+      <div class="">
+        <h3>Details</h3>
+        <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p>
+      </div>
+    </div>
+    <!-- Meetup Link if there is one -->
+    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" target="_blank" class="btn btn-danger">Join!</a>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-default" ng-click="loginCtrl.open()">Open me!</button> -->
+  </div>
+
   <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
+    <hr>
     <h2>Login</h2>
     <h3>and contribute!</h3>
     <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
@@ -65,26 +89,13 @@
     </form>
   </div>
 
-  <div class="quest-details">
-    <h2>Quest</h2>
-    <h3>Name: </h3>
-    <h4>{{loginCtrl.eventDetails.name}} </h4>
-    <h3>Location:
-    <h4>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}</h4>
-    <h3>Date:</h3>
-    <p>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
-    <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" target="_blank" class="btn btn-danger">Join!</a>
-    <!-- <h3>Details</h3>
-    <p>{{ loginCtrl.eventDetails.description || loginCtrl.eventDetails.description}}</p> -->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default" ng-click="loginCtrl.open()">Open me!</button>
-  </div>
-
 </div>
 
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-      <h3 class="modal-title" id="modal-title">Quest Details!</h3>
+
+<!-- Modal: TODO cannot access user selected event -->
+<!-- <script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header" ng-init="console.log($resolve)">
+      <h3 class="modal-title" id="modal-title">ALEX Details!</h3>
   </div>
   <div class="modal-body" id="modal-body">
       <ul>
@@ -95,10 +106,10 @@
       Selected: <b>{{ loginCtrl.selected.item }}</b>
 
       <h3>Name: </h3>
-      <h4>{{loginCtrl.eventDetails || "Nothing here..."}} </h4>
+      <h4>{{ loginCtrl.event || "Nothing here..."}} </h4>
   </div>
   <div class="modal-footer">
       <button class="btn btn-primary" type="button" ng-click="">Accept</button>
       <button class="btn btn-warning" type="button" ng-click="">Dismiss</button>
-  </div>
+  </div> -->
 </script>
