@@ -8,7 +8,7 @@ background: linear-gradient(91deg, #A0D3D3 0%, #A0D3D3 30%, #AFCA89 100%); /* w3
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', endColorstr='#AFCA89',GradientType=1 ); /* ie6-9 */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 500px) {
     .navbar-right{
         display:none;
     }

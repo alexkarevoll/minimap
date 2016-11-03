@@ -1,5 +1,5 @@
 
-<div class="col-md-9">
+<div class="col-sm-9">
 
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
   <ng-map class="map"
@@ -47,7 +47,7 @@
 
 </div>
 
-<div class="col-md-3 login-window">
+<div class="col-sm-3 login-window">
 
   <div class="quest-details">
     <h2>Quest</h2>
@@ -67,7 +67,7 @@
     <!-- Meetup Link if there is one -->
     <a ng-show="loginCtrl.eventDetails.event_url" href="{{ loginCtrl.eventDetails.event_url }}" target="_blank" class="btn btn-danger">Join!</a>
     <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-default" ng-click="loginCtrl.open()">Open me!</button> -->
+    <button type="button" class="btn btn-default" ng-click="loginCtrl.open()">Open me!</button>
   </div>
 
   <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
@@ -95,7 +95,7 @@
 
 
 <!-- Modal: TODO cannot access user selected event -->
-<!-- <script type="text/ng-template" id="myModalContent.html">
+<script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header" ng-init="console.log($resolve)">
       <h3 class="modal-title" id="modal-title">ALEX Details!</h3>
   </div>
@@ -108,10 +108,10 @@
       Selected: <b>{{ loginCtrl.selected.item }}</b>
 
       <h3>Name: </h3>
-      <h4>{{ loginCtrl.event || "Nothing here..."}} </h4>
+      <h4>{{ loginCtrl.banana || "Nothing here..."}} </h4>
   </div>
   <div class="modal-footer">
       <button class="btn btn-primary" type="button" ng-click="">Accept</button>
       <button class="btn btn-warning" type="button" ng-click="">Dismiss</button>
   </div>
-</script> -->
+</script>

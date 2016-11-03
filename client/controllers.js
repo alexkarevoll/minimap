@@ -69,6 +69,8 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
 
   vm.animationsEnabled = true;
 
+  vm.banana = $rootScope.eventDetails
+
   vm.open = function (size, parentSelector) {
     var parentElem = parentSelector ?
       angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -88,8 +90,7 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
         event: function() {
           console.log("Running the resolve.event method")
           console.log($rootScope.eventDetails)
-
-          return $rootScope.eventDetails
+          return vm.banana = $rootScope.eventDetails
         }
       }
     });
