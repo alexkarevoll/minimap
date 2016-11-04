@@ -201,4 +201,7 @@ function postController($http, AuthService){
         vm.newEvent = {}
       })
   }
+  vm.deleteEvent = function() {
+    $http.delete('/api/myevents')
+  }
 }
