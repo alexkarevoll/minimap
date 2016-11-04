@@ -29,7 +29,7 @@ Early wireframes
 + When I arrive at the website, I am immediatly given access to information about cool nerdy events around me.
 + I am invited, but not forced, to join the community to contribute events myself.
 + I am able to easily create a password protected account and begin creating events.
-+ When clicking markers I am given a small ammount of information quickly, but can ask for more information afterward.
++ When clicking markers, I am given a small amount of information quickly, but I can ask for more information.
 
 ---
 ### MVP
@@ -41,13 +41,21 @@ Early wireframes
 ---
 ### Dream Features
 + Meetup events populate as you move the map
-+ Searchbar so users can research places further afield without dragging the map
++ Search bar so users can research places further afield without dragging the map
 + Questlog where users can save events that interest them
 + Users get experience for attending events, can level up
 + Links to share events with friends
 + User generated events auto archive after the event takes place
 
 ---
+
+### Bugs
++ user events with vague locations end up with markers in the middle of nowhere
++ user event details don't display correctly on pop-up
++ login button doesn't work on Chrome for iPhone
+
+---
+
 ### This project would have been lame without help from:
 
 | 🤘 [philuchansky](https://github.com/philuchansky) | 🚴 [jimbog](https://github.com/jimbog) | 🏑 [garrettestrin](https://github.com/garrettestrin) | 💻 [kevinpagtakhan](https://github.com/kevinpagtakhan) | 👾 [plin0168](https://github.com/plin0168) | 💨 [troycarson100](https://github.com/troycarson100) | 🍟 [abregorivas](https://github.com/abregorivas) |
