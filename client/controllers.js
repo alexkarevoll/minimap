@@ -28,6 +28,7 @@ function mainController($rootScope, $state, AuthService) {
 function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $document, $rootScope) {
   var vm = this
 
+
   // MAP STUFF ----------------------------------------------
 
   NgMap.getMap().then(function(map) {
@@ -197,6 +198,7 @@ function postController($http, AuthService){
         console.log("Here is the .success data in postController.addEvent.success")
         console.log(data)
         vm.currentUser.events.push(data)
+        vm.newEvent = {}
       })
   }
 }

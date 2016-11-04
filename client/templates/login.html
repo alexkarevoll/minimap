@@ -4,7 +4,7 @@
   <!-- make a map that centers on current location or santa monica. dependent on ng-map -->
   <ng-map class="map"
           default-style="false"
-          center="{{ 'current-location' || '[34.0194,-118.4911]'}}"
+          center="{{'[34.0194,-118.35]'}}"
           zoom="11"
           styles='[{"elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"color":"#f5f5f2"},{"visibility":"on"}]},{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"poi.attraction","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","stylers":[{"visibility":"off"}]},{"featureType":"poi.school","stylers":[{"visibility":"off"}]},{"featureType":"poi.sports_complex","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#ffffff"},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"visibility":"simplified"},{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"color":"#ffffff"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.park","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#71c8d4"}]},{"featureType":"landscape","stylers":[{"color":"#e5e8e7"}]},{"featureType":"poi.park","stylers":[{"color":"#8ba129"}]},{"featureType":"road","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.sports_complex","elementType":"geometry","stylers":[{"color":"#c7c7c7"},{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#a0d3d3"}]},{"featureType":"poi.park","stylers":[{"color":"#91b65d"}]},{"featureType":"poi.park","stylers":[{"gamma":1.51}]},{"featureType":"road.local","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"poi.government","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"landscape","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"road.local","stylers":[{"visibility":"simplified"}]},{"featureType":"road"},{"featureType":"road"},{},{"featureType":"road.highway"}]'
           >
@@ -50,7 +50,7 @@
 <div class="login-window">
 
   <div class="quest-details">
-    <h4>Quest Details</h4>
+    <h4 class="nerdy">Quest Details</h4>
     <h5 ng-hide="loginCtrl.eventDetails.name">**click on a marker**</h5>
     <h5>{{loginCtrl.eventDetails.name }} </h5>
     <p>{{ loginCtrl.eventDetails.address || loginCtrl.eventDetails.venue.address_1}}<br>{{ loginCtrl.eventDetails.date || loginCtrl.eventDetails.time | date}}</p>
@@ -60,8 +60,7 @@
 
   <div class="login-window-detail" ng-show="!loginCtrl.currentUser.username">
     <hr>
-    <h4>Login</h4>
-    <h5>and contribute!</h5>
+    <h4 class="nerdy">Login</h4>
     <div ng-show="loginCtrl.error" class="alert alert-danger">{{ loginCtrl.errorMessage }}</div>
     <form class="form" ng-submit="loginCtrl.login()">
       <div class="form-group">
@@ -85,17 +84,17 @@
 <!-- Modal: TODO cannot access user selected event -->
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header" ng-init="console.log($resolve)">
-      <h3 class="modal-title" id="modal-title">Quest Details</h3>
+      <h3 class="modal-title nerdy" id="modal-title">Quest Details</h3>
   </div>
   <div class="modal-body" id="modal-body">
-      <h3>Name: </h3>
+      <h3 class="nerdy">Name: </h3>
       <p>{{ loginCtrl.modalSelect.name || "No selected Quest..."}} </p>
-      <h3>Address: </h3>
+      <h3 class="nerdy">Address: </h3>
       <p><strong>{{ loginCtrl.eventDetails.address || loginCtrl.modalSelect.venue.name}}</strong><br>{{ loginCtrl.modalSelect.venue.address_1}}<br>{{ loginCtrl.modalSelect.venue.city}}, {{ loginCtrl.modalSelect.venue.state}} {{ loginCtrl.modalSelect.venue.zip}}</p>
-      <h3>Time: </h3>
+      <h3 class="nerdy">Time: </h3>
       <p>{{loginCtrl.eventDetails.date || loginCtrl.modalSelect.time | date : 'short'}} </p>
       <!-- Meetup Link if there is one -->
-      <h3 ng-show="loginCtrl.modalSelect.event_url">Join</h3>
+      <h3 class="nerdy" ng-show="loginCtrl.modalSelect.event_url">Join</h3>
       <a ng-show="loginCtrl.modalSelect.event_url" href="{{ loginCtrl.modalSelect.event_url }}" target="_blank" class="btn btn-danger">Meetup Link</a>
   </div>
   <div class="modal-footer">

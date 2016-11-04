@@ -8,7 +8,11 @@ background: linear-gradient(91deg, #A0D3D3 0%, #A0D3D3 30%, #AFCA89 100%); /* w3
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', endColorstr='#AFCA89',GradientType=1 ); /* ie6-9 */
 }
 
-@media (max-width: 500px) {
+.body{
+  font-family: 'Open Sans', sans-serif
+}
+
+@media (max-width: 750px) {
     .navbar-right{
         display:none;
     }
@@ -16,6 +20,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', end
       height: 400px;
       margin: 0;
     }
+}
+
+.nerdy{
+  font-family: 'Press Start 2P', cursive;
+}
+
+.navbar-brand{
+  font-family: 'Press Start 2P', cursive;
 }
 
 .map{
@@ -32,8 +44,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', end
   padding: 10px;
   border-radius: 20px;
   max-width: 250px;
-}
-
-.quest-details{
-  min-height: : 420px;
 }

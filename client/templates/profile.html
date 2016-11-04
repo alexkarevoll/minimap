@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div>
-      <h1>{{ postCtrl.currentUser.username }}'s Quests <a ui-sref="login" class="btn btn-success">Return to Map</a></h1>
+      <h1 class="nerdy">{{ postCtrl.currentUser.username }}'s Quests <a ui-sref="login" class="btn btn-success">Return to Map</a></h1>
     </div>
   </div>
   <div class="row">
@@ -19,7 +19,7 @@
       </form>
     </div>
     <div class="col-md-8">
-      <h3>Your Given Quests</h3>
+      <h3 class="nerdy">Your Given Quests</h3>
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="event in postCtrl.currentUser.events"> Event Name: {{ event.name }} | Event Address: {{ event.address}}</li>
       </ul>
