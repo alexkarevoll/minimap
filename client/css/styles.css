@@ -20,6 +20,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', end
       height: 400px;
       margin: 0;
     }
+    .login-window{
+      margin-bottom: 5px;
+      margin-left: 5px;
+    }
 }
 
 .nerdy{
@@ -38,7 +42,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A0D3D3', end
 .login-window{
   position: fixed;
   bottom: 0;
-  margin-bottom: 85px;
+  margin-bottom: 20px;
   margin-left: 20px;
   background: rgba(253,253,253,.7);
   padding: 10px;
