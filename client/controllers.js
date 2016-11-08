@@ -183,6 +183,7 @@ function postController($http, AuthService){
         })
     })
 
+    // add an event
   vm.addEvent = function() {
     var newEvent = {
       by_ : vm.currentUser,
@@ -201,6 +202,7 @@ function postController($http, AuthService){
         vm.newEvent = {}
       })
   }
+  // delete an event
   vm.deleteEvent = function() {
     $http.delete('/api/myevents')
   }

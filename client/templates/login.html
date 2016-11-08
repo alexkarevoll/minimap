@@ -90,9 +90,9 @@
       <h3 class="nerdy">Name: </h3>
       <p>{{ loginCtrl.modalSelect.name || "No selected Quest..."}} </p>
       <h3 class="nerdy">Address: </h3>
-      <p><strong>{{ loginCtrl.eventDetails.address || loginCtrl.modalSelect.venue.name}}</strong><br>{{ loginCtrl.modalSelect.venue.address_1}}<br>{{ loginCtrl.modalSelect.venue.city}}, {{ loginCtrl.modalSelect.venue.state}} {{ loginCtrl.modalSelect.venue.zip}}</p>
+      <p>{{ loginCtrl.modalSelect.address || loginCtrl.modalSelect.venue.name}}<br>{{ loginCtrl.modalSelect.venue.address_1}}<br>{{ loginCtrl.modalSelect.venue.city}} {{ loginCtrl.modalSelect.venue.state}} {{ loginCtrl.modalSelect.venue.zip}}</p>
       <h3 class="nerdy">Time: </h3>
-      <p>{{loginCtrl.eventDetails.date || loginCtrl.modalSelect.time | date : 'short'}} </p>
+      <p>{{loginCtrl.modalSelect.date || loginCtrl.modalSelect.time | date : 'short'}} </p>
       <!-- Meetup Link if there is one -->
       <h3 class="nerdy" ng-show="loginCtrl.modalSelect.event_url">Join</h3>
       <a ng-show="loginCtrl.modalSelect.event_url" href="{{ loginCtrl.modalSelect.event_url }}" target="_blank" class="btn btn-danger">Meetup Link</a>
