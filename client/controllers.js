@@ -81,14 +81,9 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
       controllerAs: 'loginCtrl',
       size: size,
       appendTo: parentElem,
-      resolve: {
-        items: function () {
-          return vm.items;
-        },
-      }
+      resolve: {}
     });
     modalInstance.result.then(function (selectedItem) {
-        vm.selected = selectedItem;
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
