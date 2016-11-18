@@ -45,6 +45,7 @@
 <div class="login-window">
 
   <div class="quest-details">
+    <h1>{{loginCtrl.position}}</h1>
     <h4 class="nerdy">Quest Details</h4>
     <h5 ng-hide="loginCtrl.eventDetails.name">**click on a marker**</h5>
     <h5>{{loginCtrl.eventDetails.name }} </h5>
@@ -68,6 +69,8 @@
         </div>
         <div>
           <button type="submit" class="btn btn-default" ng-disabled="loginCtrl.disabled">Login</button>
+          <!-- A button we don't need that get's the current location and sets it to loginCtrl.position -->
+          <!-- <button type="button" class="btn btn-default" ng-click="loginCtrl.currentLocation()">show location</button> -->
           <button ui-sref="register" class="btn btn-info">Sign-Up</button>
         </div>
     </form>

@@ -36,6 +36,23 @@ function loginController($http, $state, AuthService, NgMap, $uibModal, $log, $do
     vm.map = map
   })
 
+  // awesome logic to turn current location into a variable
+  vm.currentLocation = function(){
+    console.log("getting current location");
+    var options = {
+                enableHighAccuracy: true
+            };
+
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                vm.position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                console.log(JSON.stringify(vm.position));
+            },
+            function(error) {
+                alert('Unable to get location: ' + error.message);
+            }, options);
+  };
+
+
   var data = {} // only here so it doesn't break
   // vm.eventDetails = { "name": "click a marker for details"}
   $http.get('api/events', data)
